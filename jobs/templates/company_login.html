@@ -1,0 +1,39 @@
+{% extends 'basic.html' %}
+
+{% block title %} Company Login {% endblock %}
+{% block company_login %} active {% endblock %}
+{% block css %}
+<style>
+    /* Add custom CSS styles here */
+    .form-container {
+        margin-top: 5rem;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container form-container">
+    <form method="POST" action="{% url 'company_login' %}"> 
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label"><strong>Username</strong></label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label"><strong>Password</strong></label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Submit" class="btn btn-primary" style="width: 8rem;">
+            <span class="ml-2">Haven't registered yet? <a href="/company_signup/" class="btn btn-link">Signup</a></span>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    {% if alert %}
+    alert("Invalid Credentials. Please try again.");
+    window.location.href = "/company_login";
+    {% endif %}
+</script>
+{% endblock %}
